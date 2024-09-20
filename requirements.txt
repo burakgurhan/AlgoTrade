@@ -1,2 +1,9 @@
 ta
 tscv
+yfinance
+scikit-learn
+pandas
+numpy
+streamlit
+plotly
+matplotlib
