@@ -1,3 +1,9 @@
 ta
 tscv
-e. -
+pandas
+numpy
+seaborn
+plotly
+matplotlib
+streamlit
+scikit-learn
