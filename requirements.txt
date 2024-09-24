@@ -1,9 +1,10 @@
 ta
 tscv
+yfinance
+scikit-learn
 pandas
 numpy
-seaborn
+streamlit
 plotly
 matplotlib
-streamlit
-scikit-learn
+seaborn
