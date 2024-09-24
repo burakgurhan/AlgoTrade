@@ -37,8 +37,8 @@ class FeatureEngineering:
             df['14_day_trend'] = np.nan
             df['30_day_trend'] = np.nan
 
-            df.loc[13:, '14_day_trend'] = calculate_trend(df['Close'].values, 14)
-            df.loc[29:, '30_day_trend'] = calculate_trend(df['Close'].values, 30)
+            df.iloc[13:, df.columns.get_loc('14_day_trend')] = calculate_trend(df['Close'].values, 14)
+            df.iloc[29:, df.columns.get_loc('30_day_trend')] = calculate_trend(df['Close'].values, 30)
 
             # Determine trend direction
             df['14_day_trend_direction'] = np.where(df['14_day_trend'] > 0, 1, 0)
