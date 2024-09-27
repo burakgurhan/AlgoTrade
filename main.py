@@ -23,8 +23,8 @@ class App:
     if st.button("Günlükleri Getir", type="primary"):
         st.subheader(f"Bugün al")
         buy_today, sell_today = get_today_lists(stock_list=stock_list)
-        df_buy_today = pd.DataFrame(buy_today.items())
-        df_sell_today = pd.DataFrame(sell_today.items())
+        df_buy_today = pd.DataFrame(buy_today.items(), columns=["Ticker", "Fiyat"])
+        df_sell_today = pd.DataFrame(sell_today.items(), columns=["Ticker", "Fiyat"])
         st.write("Bugün al: ")
         st.dataframe(df_buy_today)
         st.write("Bugün sat: ")
@@ -43,6 +43,9 @@ class App:
     st.subheader(f"{ticker} Kapanış Fiyatları")
     st.line_chart(data=df, x="Date", y="Close")
 
+
+    st.write("This is a data science project, is not a financial advice.\
+              Financial invesment has huge risks. Please do not make investment based on Algotrade webapp.")
 
     if st.button("Tahminleri Getir", type="primary"):
         
