@@ -23,7 +23,7 @@ class FeatureEngineering:
             raise e
         
         try:
-            df["Price_EMA7"] = np.where((df["Close"]>df["EMA7"]), 1, 0)
+            df["Price_EMA7"] = np.where((df["Close"].dropna()>df["EMA7"].dropna()), 1, 0)
             df["Price_EMA20"] = np.where((df["Close"]>df["EMA20"]), 1, 0)
             df["Price_EMA50"] = np.where((df["Close"]>df["EMA50"]), 1, 0)
             df["Price_EMA100"] = np.where((df["Close"]>df["EMA100"]), 1, 0)

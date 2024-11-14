@@ -29,9 +29,9 @@ stock_list = ['AGHOL', 'AKBNK', 'AKSA', 'AKSEN', 'ALARK', 'ARCLK', 'ASELS', 'BIM
 def get_stock(ticker):
     # DOWNLOAD DATA
     ticker = f"{ticker}.IS"
-    start_date= "2024-01-01"
-    end_date= datetime.today().strftime("%Y-%m-%d")
-    df = yf.download(ticker, start=start_date, end=end_date)
+    start = "2024-01-01"
+    end = datetime.now().strftime("%Y-%m-%d")
+    df = yf.download(ticker, start=start, end=end)
 
     #data_ingest = Pipeline.get_data(ticker, start, end)
     df_processed = Pipeline.preprocess(df)  # Avoid modifying original df
