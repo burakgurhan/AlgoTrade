@@ -31,10 +31,10 @@ def get_stock(ticker):
     ticker = f"{ticker}.IS"
     start = "2024-01-01"
     end = datetime.now().strftime("%Y-%m-%d")
-    df = yf.download(ticker, start=start, end=end)
+    #df = yf.download(ticker, start=start, end=end)
 
-    #data_ingest = Pipeline.get_data(ticker, start, end)
-    df_processed = Pipeline.preprocess(df)  # Avoid modifying original df
+    data_ingest = Pipeline.get_data(ticker, start, end)
+    df_processed = Pipeline.preprocess(data_ingest)  # Avoid modifying original df
     df_engineered = Pipeline.feature_engineer(df_processed)
     X, y = Pipeline.split_features_labels(df_engineered)
     y_pred = Pipeline.make_prediction(X, y)

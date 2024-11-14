@@ -44,8 +44,8 @@ class App:
     st.line_chart(data=df, x="Date", y="Close")
 
 
-    st.write("This is a data science project, and this is not a financial advice.\
-              Financial invesment has huge risks. Please do not make investment based on Algotrade webapp.")
+    st.write("This is a data science project, and this is not build for financial advice.\
+              Financial invesment has huge risks. Please do not make investment based on the output Algotrade webapp.")
 
     if st.button("Tahminleri Getir", type="primary"):
         
