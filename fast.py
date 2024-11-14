@@ -41,23 +41,26 @@ def get_stock(ticker):
 
   # FEATURE ENGINEERING
   df["EMA5"] = round(df["Close"].rolling(window=5).mean(),2)
-  df["EMA7"] = round(df["Close"].rolling(window=7).mean(),2)
-  df["EMA14"] = round(df["Close"].rolling(window=14).mean(),2)
-  df["EMA30"] = round(df["Close"].rolling(window=30).mean(),2)
-  df["MACD"] = ta.trend.macd(df["Close"], window_fast=12, window_slow=26, fillna=False,)
-  df["MACDS"] = ta.trend.macd_signal(df["Close"], window_fast=12, window_slow=26, fillna=False)
-  df["RSI"] = ta.momentum.rsi(df["Close"], fillna=False)
+  df["EMA20"] = round(df["Close"].rolling(window=20).mean(),2)
+  df["EMA50"] = round(df["Close"].rolling(window=50).mean(),2)
+  df["EMA100"] = round(df["Close"].rolling(window=100).mean(),2)
+
+  # Alternative Features
+  #df["MACD"] = ta.trend.macd(df["Close"], window_fast=12, window_slow=26, fillna=False,)
+  #df["MACDS"] = ta.trend.macd_signal(df["Close"], window_fast=12, window_slow=26, fillna=False)
+  #df["RSI"] = ta.momentum.rsi(df["Close"], fillna=False)
 
   df["Price_EMA5"] = np.where((df["Close"]>df["EMA5"]), 1, 0)
-  df["Price_EMA7"] = np.where((df["Close"]>df["EMA7"]), 1, 0)
-  df["Price_EMA14"] = np.where((df["Close"]>df["EMA14"]), 1, 0)
-  df["EMA5_EMA7"] = np.where((df["EMA5"]>df["EMA7"]), 1, 0)
-  df["EMA7_EMA14"] = np.where((df["EMA7"]>df["EMA14"]), 1, 0)
-  df["EMA7_EMA30"] = np.where((df["EMA7"]>df["EMA30"]), 1, 0)
+  df["Price_EMA20"] = np.where((df["Close"]>df["EMA20"]), 1, 0)
+  df["Price_EMA50"] = np.where((df["Close"]>df["EMA50"]), 1, 0)
+  df["Price_EMA100"] = np.where((df["Close"]>df["EMA100"]), 1, 0)
+  df["EMA5_EMA20"] = np.where((df["EMA5"]>df["EMA20"]), 1, 0)
+  df["EMA5_EMA50"] = np.where((df["EMA7"]>df["EMA14"]), 1, 0)
+  df["EMA20_EMA100"] = np.where((df["EMA7"]>df["EMA30"]), 1, 0)
   df["MACD_MACDS"] = np.where(df["MACD"]>df["MACDS"], 1,0)
 
   # TRAIN-TEST SPLIT
-  X = df[["Price_EMA5", "Price_EMA7", "Price_EMA14", "EMA5_EMA7", "EMA7_EMA30", "EMA7_EMA14", "MACD_MACDS"]]
+  X = df[["Price_EMA5", "Price_EMA20", "Price_EMA50", "Price_EMA100", "EMA5_EMA20", "EMA5_EMA50", "EMA20_EMA100"]]
   y = df["Target"]
 
   # CROSS-VALIDATION

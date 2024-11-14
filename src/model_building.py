@@ -7,7 +7,7 @@ from sklearn.tree import DecisionTreeClassifier
 class ModelBuilding:
     def features_targets(df):
         try:
-            feature_columns = ["Price_EMA5", "Price_EMA7", "Price_EMA14", "Price_EMA30", "EMA7_EMA14", "EMA7_EMA30", "MACD_MACDS", "14_day_trend_direction", "30_day_trend_direction"]
+            feature_columns = ["Price_EMA5", "Price_EMA20", "Price_EMA50", "Price_EMA100", "EMA5_EMA20", "EMA5_EMA50", "EMA20_EMA100", "14_day_trend_direction", "30_day_trend_direction"]
             X = df[feature_columns]
             y = df["Target"]
             return X,y
