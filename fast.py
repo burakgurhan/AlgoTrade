@@ -28,7 +28,7 @@ stock_list = ['AGHOL', 'AKBNK', 'AKSA', 'AKSEN', 'ALARK', 'ARCLK', 'ASELS', 'BIM
 
 def get_stock(ticker):
     # DOWNLOAD DATA
-    ticker = f"{ticker}.IS"
+    ticker = f"{ticker}"
     start = "2024-01-01"
     end = datetime.now().strftime("%Y-%m-%d")
     #df = yf.download(ticker, start=start, end=end)
