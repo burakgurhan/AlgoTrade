@@ -16,6 +16,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score
+from pipeline import *
 
 
 stock_list = ['AGHOL', 'AKBNK', 'AKSA', 'AKSEN', 'ALARK', 'ARCLK', 'ASELS', 'BIMAS', 'BRSAN', 'BTCIM', 'CANTE', 'CCOLA', 
@@ -26,60 +27,21 @@ stock_list = ['AGHOL', 'AKBNK', 'AKSA', 'AKSEN', 'ALARK', 'ARCLK', 'ASELS', 'BIM
               'ULKER', 'VAKBN', 'VESBE', 'VESTL', 'YATAS', 'YKBNK', 'YYLGD', 'ZOREN']
 
 def get_stock(ticker):
-  # DOWNLOAD DATA
-  ticker = f"{ticker}.IS"
-  start_date= "2024-01-01"
-  end_date= datetime.datetime.today().strftime("%Y-%m-%d")
-  df = yf.download(ticker, start=start_date, end=end_date)
+    # DOWNLOAD DATA
+    ticker = f"{ticker}.IS"
+    start_date= "2024-01-01"
+    end_date= datetime.datetime.today().strftime("%Y-%m-%d")
+    df = yf.download(ticker, start=start_date, end=end_date)
 
-  # DATA PREPROCESSING
-  df["Return"] = df["Close"].diff()
-  df["Return_pct"] = df["Close"].pct_change()
-  df["Target"] = np.where(df["Return"]>0,1,0)
-  df.drop(["Open", "High", "Low", "Adj Close", "Volume"], axis=1, inplace=True)
-  df["Close"] = round(df["Close"], 2)
+    #data_ingest = Pipeline.get_data(ticker, start, end)
+    df_processed = Pipeline.preprocess(df)  # Avoid modifying original df
+    df_engineered = Pipeline.feature_engineer(df_processed)
+    X, y = Pipeline.split_features_labels(df_engineered)
+    y_pred = Pipeline.make_prediction(X, y)
+    df_engineered["Prediction"] = y_pred
+    df_engineered = Pipeline.calculate_technical_indicators(df_engineered)
 
-  # FEATURE ENGINEERING
-  df["EMA5"] = round(df["Close"].rolling(window=5).mean(),2)
-  df["EMA20"] = round(df["Close"].rolling(window=20).mean(),2)
-  df["EMA50"] = round(df["Close"].rolling(window=50).mean(),2)
-  df["EMA100"] = round(df["Close"].rolling(window=100).mean(),2)
-
-  # Alternative Features
-  #df["MACD"] = ta.trend.macd(df["Close"], window_fast=12, window_slow=26, fillna=False,)
-  #df["MACDS"] = ta.trend.macd_signal(df["Close"], window_fast=12, window_slow=26, fillna=False)
-  #df["RSI"] = ta.momentum.rsi(df["Close"], fillna=False)
-
-  df["Price_EMA5"] = np.where((df["Close"]>df["EMA5"]), 1, 0)
-  df["Price_EMA20"] = np.where((df["Close"]>df["EMA20"]), 1, 0)
-  df["Price_EMA50"] = np.where((df["Close"]>df["EMA50"]), 1, 0)
-  df["Price_EMA100"] = np.where((df["Close"]>df["EMA100"]), 1, 0)
-  df["EMA5_EMA20"] = np.where((df["EMA5"]>df["EMA20"]), 1, 0)
-  df["EMA5_EMA50"] = np.where((df["EMA5"]>df["EMA50"]), 1, 0)
-  df["EMA20_EMA100"] = np.where((df["EMA20"]>df["EMA100"]), 1, 0)
-  #df["MACD_MACDS"] = np.where(df["MACD"]>df["MACDS"], 1,0)
-
-  # TRAIN-TEST SPLIT
-  X = df[["Price_EMA5", "Price_EMA20", "Price_EMA50", "Price_EMA100", "EMA5_EMA20", "EMA5_EMA50", "EMA20_EMA100"]]
-  y = df["Target"]
-
-  # CROSS-VALIDATION
-  cv = GapWalkForward(n_splits=20, gap_size=0, test_size=5)
-
-  # MODEL
-  model = RandomForestClassifier(n_estimators=200, max_depth=3, max_leaf_nodes=30, min_samples_split=5).fit(X,y)
-
-  df["Prediction"] = model.predict(X)
-
-  # POSTPROCESSING
-  df["Buy"] = np.where((df["Prediction"]==1), 1, 0)
-  df["Sell"] = np.where((df["Prediction"]==0), 1, 0)
-  df["Buy_DT_ind"] = np.where((df["Buy"] > df["Buy"].shift(1)), 1, 0)
-  df["Sell_DT_ind"] = np.where((df["Sell"] > df["Sell"].shift(1)), 1, 0)
-
-  df["Value_DT"]=1000*(1+(np.where(df["Buy"]==1, 0.90*df["Return_pct"], 0)).cumsum())
-
-  return df
+    return df_engineered
 
 def get_today_lists(stock_list):
     buy_today = {}
