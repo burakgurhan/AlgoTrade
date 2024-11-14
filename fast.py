@@ -30,7 +30,7 @@ def get_stock(ticker):
     # DOWNLOAD DATA
     ticker = f"{ticker}.IS"
     start_date= "2024-01-01"
-    end_date= datetime.datetime.today().strftime("%Y-%m-%d")
+    end_date= datetime.today().strftime("%Y-%m-%d")
     df = yf.download(ticker, start=start_date, end=end_date)
 
     #data_ingest = Pipeline.get_data(ticker, start, end)
