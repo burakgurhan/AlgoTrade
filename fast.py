@@ -55,9 +55,9 @@ def get_stock(ticker):
   df["Price_EMA50"] = np.where((df["Close"]>df["EMA50"]), 1, 0)
   df["Price_EMA100"] = np.where((df["Close"]>df["EMA100"]), 1, 0)
   df["EMA5_EMA20"] = np.where((df["EMA5"]>df["EMA20"]), 1, 0)
-  df["EMA5_EMA50"] = np.where((df["EMA7"]>df["EMA14"]), 1, 0)
-  df["EMA20_EMA100"] = np.where((df["EMA7"]>df["EMA30"]), 1, 0)
-  df["MACD_MACDS"] = np.where(df["MACD"]>df["MACDS"], 1,0)
+  df["EMA5_EMA50"] = np.where((df["EMA5"]>df["EMA50"]), 1, 0)
+  df["EMA20_EMA100"] = np.where((df["EMA20"]>df["EMA100"]), 1, 0)
+  #df["MACD_MACDS"] = np.where(df["MACD"]>df["MACDS"], 1,0)
 
   # TRAIN-TEST SPLIT
   X = df[["Price_EMA5", "Price_EMA20", "Price_EMA50", "Price_EMA100", "EMA5_EMA20", "EMA5_EMA50", "EMA20_EMA100"]]
