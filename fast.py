@@ -18,17 +18,8 @@ from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score
 from pipeline import *
 
-
-stock_list = ['AGHOL', 'AKBNK', 'AKSA', 'AKSEN', 'ALARK', 'ARCLK', 'ASELS', 'BIMAS', 'BRSAN', 'BTCIM', 'CANTE', 'CCOLA', 
-              'CIMSA', 'DOAS', 'DOHOL', 'DURDO', 'ECZYT', 'EGEEN', 'EGSER', 'EKGYO', 'ENJSA', 'ENKAI', 'EREGL', 'FONET', 
-              'FROTO', 'GARAN', 'GUBRF', 'HALKB', 'ISDMR', 'ISGYO', 'ISMEN', 'KCHOL', 'KLGYO', 'KOZAA', 'KOZAL', 'LMKDC', 
-              'MAVI', 'MGROS', 'MIATK', 'ODAS', 'OTKAR', 'PETKM', 'PGSUS', 'QUAGR', 'REEDR', 'SAHOL', 'SASA', 'SISE', 
-              'SKBNK', 'SNICA', 'TABGD', 'TAVHL', 'TCELL', 'THYAO', 'TKFEN', 'TKNSA', 'TTKOM', 'TUKAS', 'TUPRS', 
-              'ULKER', 'VAKBN', 'VESBE', 'VESTL', 'YATAS', 'YKBNK', 'YYLGD', 'ZOREN']
-
 def get_stock(ticker):
     # DOWNLOAD DATA
-    ticker = f"{ticker}"
     start = "2024-01-01"
     end = datetime.now().strftime("%Y-%m-%d")
     #df = yf.download(ticker, start=start, end=end)
@@ -58,4 +49,4 @@ def get_today_lists(stock_list):
 
     return buy_today, sell_today
 
-get_today_lists(stock_list)
+#get_today_lists(stock_list)
