@@ -15,7 +15,7 @@ class FeatureEngineering:
                 trends.append(slope)
             return trends
         try:
-            df["EMA5"] = round(df["Close"].rolling(window=5).mean(),2)
+            df["EMA7"] = round(df["Close"].rolling(window=7).mean(),2)
             df["EMA20"] = round(df["Close"].rolling(window=20).mean(),2)
             df["EMA50"] = round(df["Close"].rolling(window=50).mean(),2)
             df["EMA100"] = round(df["Close"].rolling(window=100).mean(),2)
@@ -23,12 +23,12 @@ class FeatureEngineering:
             raise e
         
         try:
-            df["Price_EMA5"] = np.where((df["Close"]>df["EMA5"]), 1, 0)
+            df["Price_EMA7"] = np.where((df["Close"]>df["EMA7"]), 1, 0)
             df["Price_EMA20"] = np.where((df["Close"]>df["EMA20"]), 1, 0)
             df["Price_EMA50"] = np.where((df["Close"]>df["EMA50"]), 1, 0)
             df["Price_EMA100"] = np.where((df["Close"]>df["EMA100"]), 1, 0)
-            df["EMA5_EMA20"] = np.where((df["EMA5"]>df["EMA20"]), 1, 0)
-            df["EMA5_EMA50"] = np.where((df["EMA5"]>df["EMA50"]), 1, 0)
+            df["EMA7_EMA20"] = np.where((df["EMA7"]>df["EMA20"]), 1, 0)
+            df["EMA7_EMA50"] = np.where((df["EMA7"]>df["EMA50"]), 1, 0)
             df["EMA20_EMA100"] = np.where((df["EMA20"]>df["EMA100"]), 1, 0)
             
 
