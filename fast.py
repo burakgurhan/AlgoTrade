@@ -22,7 +22,7 @@ def get_stock(ticker):
     # DOWNLOAD DATA
     start = "2024-01-01"
     end = datetime.now().strftime("%Y-%m-%d")
-    #df = yf.download(ticker, start=start, end=end)
+    #df = yf.download(ticker, start=start, end=end, multi_level_index=True)
 
     data_ingest = Pipeline.get_data(ticker, start, end)
     df_processed = Pipeline.preprocess(data_ingest)  # Avoid modifying original df

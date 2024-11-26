@@ -10,7 +10,8 @@ class DataIngestion:
         try:
             data = yf.download(tickers=f"{ticker}.IS", 
                                start=start,
-                               end=end)
+                               end=end,
+                               multi_level_index=False)
             return data
         except Exception as e:
             raise e
