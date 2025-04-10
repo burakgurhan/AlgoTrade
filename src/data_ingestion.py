@@ -1,17 +1,23 @@
-import pandas as pd
 import yfinance as yf
-import numpy as np
-import os
 from datetime import datetime
-import time
-
 class DataIngestion:
-    def data_ingestion(ticker:str, start:datetime, end:datetime):
+    def data_ingestion(ticker: str, start: datetime, end: datetime):
         try:
-            data = yf.download(tickers=f"{ticker}.IS", 
-                               start=start,
-                               end=end,
-                               multi_level_index=False)
+            data = yf.download(
+                tickers=str(ticker),
+                start=start,
+                end=end,
+                progress=False,  # Suppress progress output
+                multi_level_index=False
+            )
+            print(ticker)
+            print(start)
+            print(end)
+            # Verify data was retrieved successfully
+            if data.empty:
+                raise ValueError(f"No data retrieved for ticker {ticker}")
+            
             return data
+        
         except Exception as e:
-            raise e
+            raise RuntimeError(f"Data ingestion failed for {ticker}: {str(e)}")

@@ -1,27 +1,11 @@
-import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 import datetime
-import plotly.express as px
-
-import yfinance as yf
 import ta as ta
-from tscv import GapWalkForward
-
-
-from sklearn.model_selection import GridSearchCV
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import cross_val_score
-from sklearn.metrics import accuracy_score
 from pipeline import *
 
 def get_stock(ticker):
     # DOWNLOAD DATA
     start = "2024-01-01"
-    end = datetime.now().strftime("%Y-%m-%d")
+    end = datetime.datetime.now().strftime("%Y-%m-%d")
     #df = yf.download(ticker, start=start, end=end, multi_level_index=True)
 
     data_ingest = Pipeline.get_data(ticker, start, end)
