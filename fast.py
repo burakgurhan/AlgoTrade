@@ -25,7 +25,7 @@ def get_stock(ticker):
   
     # DOWNLOAD DATA
     crypto_ticker = f"{ticker}-USD"
-    start_date = "2023-01-01"
+    start_date = "2025-01-01"
     end_date = datetime.now()
 
     data = yf.download(tickers=crypto_ticker, 
@@ -42,22 +42,22 @@ def get_stock(ticker):
     
 
     # FEATURE ENGINEERING
-    df["EMA7"] = ta.trend.ema_indicator(df["Close"], window=7, fillna=False)
+    df["EMA10"] = ta.trend.ema_indicator(df["Close"], window=10, fillna=False)
     df["EMA30"] = ta.trend.ema_indicator(df["Close"], window=30, fillna=False)
-    df["EMA90"] = ta.trend.ema_indicator(df["Close"], window=90, fillna=False)
-    df["EMA180"] = ta.trend.ema_indicator(df["Close"], window=180, fillna=False)
+    df["EMA60"] = ta.trend.ema_indicator(df["Close"], window=60, fillna=False)
+    df["EMA100"] = ta.trend.ema_indicator(df["Close"], window=100, fillna=False)
 
-    df["P_EMA7"] = np.where(df["Close"]>df["EMA7"], 1,0)
+    df["P_EMA10"] = np.where(df["Close"]>df["EMA10"], 1,0)
     df["P_EMA30"] = np.where(df["Close"]>df["EMA30"], 1,0)
-    df["P_EMA90"] = np.where(df["Close"]>df["EMA90"], 1,0)
-    df["P_EMA180"] = np.where(df["Close"]>df["EMA180"], 1,0)
-    df["EMA7_EMA90"] = np.where(df["EMA7"]>df["EMA90"], 1,0)
-    df["EMA7_EMA180"] = np.where(df["EMA7"]>df["EMA180"], 1,0)
+    df["P_EMA60"] = np.where(df["Close"]>df["EMA60"], 1,0)
+    df["P_EMA100"] = np.where(df["Close"]>df["EMA100"], 1,0)
+    df["EMA10_EMA60"] = np.where(df["EMA10"]>df["EMA60"], 1,0)
+    df["EMA10_EMA100"] = np.where(df["EMA10"]>df["EMA100"], 1,0)
 
     df.dropna(inplace=True)
 
     # TRAIN-TEST SPLIT
-    X = df[["P_EMA7", "P_EMA30", "P_EMA90", "P_EMA180", "EMA7_EMA90", "EMA7_EMA180"]]
+    X = df[["P_EMA10", "P_EMA30", "P_EMA60", "P_EMA100", "EMA10_EMA60", "EMA10_EMA100"]]
     y = df["Target"]
 
     # CROSS-VALIDATION

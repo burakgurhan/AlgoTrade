@@ -10,8 +10,8 @@ import seaborn as sns
 import ftplib
 import streamlit as st
 
-start_date = "2024-03-01"
-end_date = "2024-08-19"
+start_date = "2025-01-01"
+end_date = "2025-08-19"
 ticker_list = ["AKSA", "ISDMR", "ISMEN", "VESBE", "FROTO", "TUPRS","EGEEN"]
 ticker = st.selectbox(options=ticker_list, label="Please Select a Stock")
 stock_name = f"{ticker}.IS"

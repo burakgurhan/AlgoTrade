@@ -32,7 +32,7 @@ class App:
 
     ticker = st.selectbox(label="Hisse senedi seçin", options=stock_list)
 
-    start, end = st.slider("Tarih aralığı belirleyin",value=[datetime(2023, 1, 1), datetime.today()])
+    start, end = st.slider("Tarih aralığı belirleyin",value=[datetime(2025, 1, 1), datetime.today()])
 
     st.subheader("Hissenin Son 5 günlük verileri")
 
