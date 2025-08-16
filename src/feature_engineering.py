@@ -15,23 +15,22 @@ class FeatureEngineering:
                 trends.append(slope)
             return trends
         try:
-            df["EMA5"] = round(df["Close"].rolling(window=5).mean(),2)
             df["EMA7"] = round(df["Close"].rolling(window=7).mean(),2)
-            df["EMA14"] = round(df["Close"].rolling(window=14).mean(),2)
-            df["EMA30"] = round(df["Close"].rolling(window=30).mean(),2)
-            df["MACD"] = ta.trend.macd(df["Close"], window_fast=12, window_slow=26, fillna=False,)
-            df["MACDS"] = ta.trend.macd_signal(df["Close"], window_fast=12, window_slow=26, fillna=False)
+            df["EMA20"] = round(df["Close"].rolling(window=20).mean(),2)
+            df["EMA50"] = round(df["Close"].rolling(window=50).mean(),2)
+            df["EMA100"] = round(df["Close"].rolling(window=100).mean(),2)
         except Exception as e:
             raise e
         
         try:
-            df["Price_EMA5"] = np.where((df["Close"]>df["EMA5"]), 1, 0)
             df["Price_EMA7"] = np.where((df["Close"]>df["EMA7"]), 1, 0)
-            df["Price_EMA14"] = np.where((df["Close"]>df["EMA14"]), 1, 0)
-            df["Price_EMA30"] = np.where((df["Close"]>df["EMA30"]), 1, 0)
-            df["EMA7_EMA14"] = np.where((df["EMA7"]>df["EMA14"]), 1, 0)
-            df["EMA7_EMA30"] = np.where((df["EMA7"]>df["EMA30"]), 1, 0)
-            df["MACD_MACDS"] = np.where(df["MACD"]>df["MACDS"], 1,0)
+            df["Price_EMA20"] = np.where((df["Close"]>df["EMA20"]), 1, 0)
+            df["Price_EMA50"] = np.where((df["Close"]>df["EMA50"]), 1, 0)
+            df["Price_EMA100"] = np.where((df["Close"]>df["EMA100"]), 1, 0)
+            df["EMA7_EMA20"] = np.where((df["EMA7"]>df["EMA20"]), 1, 0)
+            df["EMA7_EMA50"] = np.where((df["EMA7"]>df["EMA50"]), 1, 0)
+            df["EMA20_EMA100"] = np.where((df["EMA20"]>df["EMA100"]), 1, 0)
+            
 
             # Calculate trends for 14-day and 30-day windows
             df['14_day_trend'] = np.nan

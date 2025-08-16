@@ -15,7 +15,7 @@ end_date = "2024-08-19"
 ticker_list = ["AKSA", "ISDMR", "ISMEN", "VESBE", "FROTO", "TUPRS","EGEEN"]
 ticker = st.selectbox(options=ticker_list, label="Please Select a Stock")
 stock_name = f"{ticker}.IS"
-df = yf.download(tickers=stock_name, start=start_date, end=end_date, )
+df = yf.download(tickers=stock_name, start=start_date, end=end_date, multi_level_index=False)
 
 st.dataframe(df)  # Display DataFrame only once
 
