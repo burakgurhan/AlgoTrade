@@ -19,7 +19,7 @@ from sklearn.ensemble import RandomForestClassifier
 stock_list = ["BTC", "XRP", "ETH", "SOL", "BNB", 
               "DOGE", "AVAX", "SHIB", "LINK", "BCH", 
                "USDT", "TRX", "ADA", "PYTH", "LTC", 
-               "NEAR", "MATIC", "DOT", "FTM"]
+               "NEAR", "MATIC", "DOT"]
 
 def get_stock(ticker):
   
@@ -32,7 +32,7 @@ def get_stock(ticker):
                        start=start_date, 
                        end=end_date, 
                        multi_level_index=False)
-    df = pd.DataFrame(data=data["Adj Close"].values, index=data.index)
+    df = pd.DataFrame(data=data["Close"].values, index=data.index)
     df.columns = ["Close"]
     
     # DATA PREPROCESSING
