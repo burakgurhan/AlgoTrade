@@ -1,4 +1,8 @@
 import pandas as pd
+import numpy as np
+import os
+from datetime import datetime
+
 from src.data_ingestion import DataIngestion
 from src.data_preprocessing import DataTransformation
 from src.feature_engineering import FeatureEngineering
@@ -10,13 +14,9 @@ class Pipeline:
     def get_data(ticker, start, end):
         try:
             df = DataIngestion.data_ingestion(ticker, start, end)
-            if df is None:
-                raise RuntimeError(f"No data returned for {ticker}")
-            if not isinstance(df.index, pd.DatetimeIndex):
-                raise ValueError("Data index must be DatetimeIndex")
             return df
         except Exception as e:
-            raise RuntimeError(f"Failed to get data for {ticker}: {str(e)}")
+            raise e
         
     def preprocess(df):
         try:

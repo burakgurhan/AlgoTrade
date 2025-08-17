@@ -1,11 +1,10 @@
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 import pandas as pd
 import numpy as np
-from constants import stock_list, crypto_list
+
 class Utils:
     def __init__(self) -> None:
-        self.stock_list = stock_list
-        self.crypto_list = crypto_list
+        self.stock_list = ["AKSA", "ISMEN", "ISDMR", "FROTO", "TUPRS", "SAHOL", "EGEEN", "EGSER", "VESBE"]
 
     def evaluate_model(y_true, y_pred):
         try:

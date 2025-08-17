@@ -9,6 +9,7 @@ from pipeline import *
 import plotly.express as px
 from fast import get_today_lists
 
+<<<<<<< HEAD
 stock_list = ["BTC", "XRP", "ETH", "SOL", "BNB", "DOGE","AVAX", "SHIB", "LINK", "BCH", 
                "USDT", "TRX", "ADA", "PYTH", "LTC", "NEAR", "MATIC", "DOT", "FTM",
                "XLM", "SAND", "PEPE", "MANA", "TROY", "TIA", "POL", "BCH"]
@@ -49,6 +50,48 @@ class App:
 
     if st.button("Tahminleri Getir", type="primary"):
         
+=======
+stock_list = ['AGHOL', 'AKBNK', 'AKSA', 'AKSEN', 'ALARK', 'ARCLK', 'ASELS', 'BIMAS', 'BRSAN', 'BTCIM', 'CANTE', 'CCOLA', 
+              'CIMSA', 'DOAS', 'DOHOL', 'DURDO', 'ECZYT', 'EGEEN', 'EGSER', 'EKGYO', 'ENJSA', 'ENKAI', 'EREGL', 'FONET', 
+              'FROTO', 'GARAN', 'GUBRF', 'HALKB', 'ISDMR', 'ISGYO', 'ISMEN', 'KCHOL', 'KLGYO', 'KOZAA', 'KOZAL', 'LMKDC', 
+              'MAVI', 'MGROS', 'MIATK', 'ODAS', 'OTKAR', 'PETKM', 'PGSUS', 'QUAGR', 'REEDR', 'SAHOL', 'SASA', 'SISE', 
+              'SKBNK', 'SNICA', 'TABGD', 'TAVHL', 'TCELL', 'THYAO', 'TKFEN', 'TKNSA', 'TTKOM', 'TUKAS', 'TUPRS', 
+              'ULKER', 'VAKBN', 'VESBE', 'VESTL', 'YATAS', 'YKBNK', 'YYLGD', 'ZOREN']
+
+class App:
+   
+    st.title("Algoritmik Trade App")
+    
+    if st.button("Günlükleri Getir", type="primary"):
+        st.subheader(f"Bugün al")
+        buy_today, sell_today = get_today_lists(stock_list=stock_list)
+        df_buy_today = pd.DataFrame(buy_today.items(), columns=["Ticker", "Fiyat"])
+        df_sell_today = pd.DataFrame(sell_today.items(), columns=["Ticker", "Fiyat"])
+        st.write("Bugün al: ")
+        st.dataframe(df_buy_today)
+        st.write("Bugün sat: ")
+        st.dataframe(df_sell_today)
+
+    ticker = st.selectbox(label="Hisse senedi seçin", options=stock_list)
+
+    start, end = st.slider("Tarih aralığı belirleyin",value=[datetime(2024, 1, 1), datetime.today()])
+
+    st.subheader("Hissenin Son 5 günlük verileri")
+
+    df:pd.DataFrame = DataIngestion.data_ingestion(ticker, start, end)
+    df.reset_index(inplace=True)
+    st.dataframe(data=df.tail())
+
+    st.subheader(f"{ticker} Kapanış Fiyatları")
+    st.line_chart(data=df, x="Date", y="Close")
+
+
+    st.write("This is a data science project, and this is not build for financial advice.\
+              Financial invesment has huge risks. Please do not make investment based on the output Algotrade webapp.")
+
+    if st.button("Tahminleri Getir", type="primary"):
+        
+>>>>>>> parent of b7d9335 (V2.0)
         # Call pipeline functions here
         data_ingest = Pipeline.get_data(ticker, start, end)
         df_processed = Pipeline.preprocess(data_ingest)  # Avoid modifying original df
