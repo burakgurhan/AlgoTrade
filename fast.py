@@ -4,9 +4,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import datetime
 import plotly.express as px
-<<<<<<< HEAD
-=======
-
 import yfinance as yf
 import ta as ta
 from tscv import GapWalkForward
@@ -18,7 +15,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score
->>>>>>> parent of b7d9335 (V2.0)
+
 from pipeline import *
 from datetime import datetime
 
@@ -39,15 +36,15 @@ stock_list = ["BTC", "XRP", "ETH", "SOL", "BNB",
 def get_stock(ticker):
   
     # DOWNLOAD DATA
-<<<<<<< HEAD
+
     crypto_ticker = f"{ticker}-USD"
     start_date = "2025-01-01"
     end_date = datetime.now()
-=======
+
     start = "2024-01-01"
     end = datetime.now().strftime("%Y-%m-%d")
     #df = yf.download(ticker, start=start, end=end, multi_level_index=True)
->>>>>>> parent of b7d9335 (V2.0)
+
 
     data = yf.download(tickers=crypto_ticker, 
                        start=start_date, 
