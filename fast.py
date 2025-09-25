@@ -1,37 +1,25 @@
 import pandas as pd
 import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 import datetime
-import plotly.express as px
 import yfinance as yf
 import ta as ta
-from tscv import GapWalkForward
-
-
-from sklearn.model_selection import GridSearchCV
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import cross_val_score
-from sklearn.metrics import accuracy_score
 
 from pipeline import *
 from datetime import datetime
 
 import yfinance as yf
 import ta as ta
-from tscv import GapWalkForward
-
-
 from sklearn.ensemble import RandomForestClassifier
 
 
 
-stock_list = ["BTC", "XRP", "ETH", "SOL", "BNB", 
-              "DOGE", "AVAX", "SHIB", "LINK", "BCH", 
-               "USDT", "TRX", "ADA", "PYTH", "LTC", 
-               "NEAR", "MATIC", "DOT"]
+stock_list = [
+    "BTC", "XRP", "ETH", "SOL", "BNB", 
+    "DOGE", "AVAX", "SHIB", "LINK", "BCH", 
+    "USDT", "TRX", "ADA", "PYTH", "LTC", 
+    "NEAR", "MATIC", "DOT"
+]
 
 def get_stock(ticker):
   

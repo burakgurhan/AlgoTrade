@@ -1,17 +1,41 @@
 import pandas as pd
 import yfinance as yf
-import numpy as np
-import os
 from datetime import datetime
-import time
 
 class DataIngestion:
-    def data_ingestion(ticker:str, start:datetime, end:datetime):
+    def get_dates(self) -> tuple[datetime, datetime]:
+        end = datetime.now()
+        end = datetime(end.year, end.month, end.day)
+        start_year = end.year - 1
+        start_month = end.month
+        start_day = end.day
+        start = datetime(start_year, start_month, start_day)
+        return start, end
+
+    def data_ingestion(ticker:str, start:datetime, end:datetime) -> pd.DataFrame:
         try:
-            data = yf.download(tickers=f"{ticker}.IS", 
-                               start=start,
-                               end=end,
-                               multi_level_index=False)
+            # Determine if the ticker is for crypto or stock based on its length
+            ticker = ticker.upper()
+            # Crypto ingestion
+            if len(ticker) < 4:
+                data = yf.download(
+                    tickers=f"{ticker}-USD", 
+                    start=start,
+                    end=end,
+                    multi_level_index=False
+                   )
+            # Stock ingestion
+            else:
+                data = yf.download(
+                    tickers=f"{ticker}.IS",
+                    start=start,
+                    end=end,
+                    multi_level_index=False
+                )
+            
+            if data.empty:
+                raise ValueError(f"No data returned for {ticker}")
+            
             return data
         except Exception as e:
-            raise e
+            raise Exception(f"Error while fetching data for {ticker}: {e}")

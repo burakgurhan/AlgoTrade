@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 from datetime import datetime, date
@@ -6,16 +5,16 @@ from src.data_ingestion import DataIngestion
 from pipeline import Pipeline
 import plotly.express as px
 from fast import get_today_lists
+from yaml import safe_load
+
+# Load configuration from config.yaml
+with open("config.yaml", "r") as file:
+    config = safe_load(file)
+
 
 # Choose your stock list: crypto or stocks
-# Uncomment the one you want to use
-# stock_list = ["BTC", "XRP", "ETH", "SOL", "BNB", "DOGE","AVAX", "SHIB", "LINK", "BCH", "USDT", "TRX", "ADA", "PYTH", "LTC", "NEAR", "MATIC", "DOT", "FTM", "XLM", "SAND", "PEPE", "MANA", "TROY", "TIA", "POL", "BCH"]
-stock_list = ['AGHOL', 'AKBNK', 'AKSA', 'AKSEN', 'ALARK', 'ARCLK', 'ASELS', 'BIMAS', 'BRSAN', 'BTCIM', 'CANTE', 'CCOLA',
-              'CIMSA', 'DOAS', 'DOHOL', 'DURDO', 'ECZYT', 'EGEEN', 'EGSER', 'EKGYO', 'ENJSA', 'ENKAI', 'EREGL', 'FONET',
-              'FROTO', 'GARAN', 'GUBRF', 'HALKB', 'ISDMR', 'ISGYO', 'ISMEN', 'KCHOL', 'KLGYO', 'KOZAA', 'KOZAL', 'LMKDC',
-              'MAVI', 'MGROS', 'MIATK', 'ODAS', 'OTKAR', 'PETKM', 'PGSUS', 'QUAGR', 'REEDR', 'SAHOL', 'SASA', 'SISE',
-              'SKBNK', 'SNICA', 'TABGD', 'TAVHL', 'TCELL', 'THYAO', 'TKFEN', 'TKNSA', 'TTKOM', 'TUKAS', 'TUPRS',
-              'ULKER', 'VAKBN', 'VESBE', 'VESTL', 'YATAS', 'YKBNK', 'YYLGD', 'ZOREN']
+stock_list = config['stock_list']
+crypto_list = config['crypto_list']
 
 st.title("Algoritmik Trade App")
 
@@ -28,6 +27,9 @@ if st.button("Günlükleri Getir", type="primary"):
     st.dataframe(df_buy_today)
     st.write("Bugün sat: ")
     st.dataframe(df_sell_today)
+
+# Determine the dates for data ingestion in 365 days range
+start, end = DataIngestion().get_dates()
 
 ticker = st.selectbox(label="Hisse senedi seçin", options=stock_list)
 

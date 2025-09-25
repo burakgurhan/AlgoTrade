@@ -1,10 +1,19 @@
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 import pandas as pd
 import numpy as np
-
+from datetime import datetime
 class Utils:
     def __init__(self) -> None:
         self.stock_list = ["AKSA", "ISMEN", "ISDMR", "FROTO", "TUPRS", "SAHOL", "EGEEN", "EGSER", "VESBE"]
+
+    def get_dates(self) -> tuple[datetime, datetime]:
+        end = datetime.now()
+        end = datetime(end.year, end.month, end.day)
+        start_year = end.year - 1
+        start_month = end.month
+        start_day = end.day
+        start = datetime(start_year, start_month, start_day)
+        return start, end
 
     def evaluate_model(y_true, y_pred):
         try:
