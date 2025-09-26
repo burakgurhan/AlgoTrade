@@ -3,6 +3,8 @@ import numpy as np
 class DataTransformation:
     def preprocessing(df:pd.DataFrame, ticker:str) -> pd.DataFrame:    
         try:
+            df = df.dropna()
+            df = df["Close"].to_frame()
             df["Return"] = df["Close"].diff()
             df["Return_pct"] = df["Close"].pct_change()
             df["Target"] = np.where(df["Return"]>0, 1, 0)

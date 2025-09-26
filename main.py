@@ -33,6 +33,7 @@ if st.button("Günlükleri Getir", type="primary"):
 start, end = Utils().get_dates()
 
 ticker = st.selectbox(label="Hisse senedi seçin", options=stock_list)
+kind = "stock" if ticker in stock_list else "crypto"
 
 # Use st.date_input for date selection
 col1, col2 = st.columns(2)
@@ -43,7 +44,7 @@ with col2:
 
 st.subheader("Hissenin Son 5 günlük verileri")
 try:
-    df = DataIngestion.data_ingestion(ticker, start, end)
+    df = DataIngestion.data_ingestion(ticker, start, end, kind=kind)
     if df is not None and not df.empty:
         df = df.reset_index()
         st.dataframe(data=df.tail())

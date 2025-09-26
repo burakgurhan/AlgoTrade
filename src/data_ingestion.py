@@ -3,7 +3,7 @@ import yfinance as yf
 from datetime import datetime
 
 class DataIngestion:
-    def data_ingestion(ticker:str, start:datetime, end:datetime, kind="stock") -> pd.DataFrame:
+    def data_ingestion(ticker:str, start:datetime, end:datetime, kind:str) -> pd.DataFrame:
         try:
             # Determine if the ticker is for crypto or stock based on its length
             ticker = ticker.upper()

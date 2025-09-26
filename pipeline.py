@@ -16,7 +16,6 @@ class Pipeline:
 
 
     def get_data(self, ticker, start, end, kind):
-        """Veriyi DataIngestion sınıfı üzerinden çeker."""
         try:
             df = self.data_ingestion.data_ingestion(ticker, start, end, kind=kind)
             return df
@@ -26,42 +25,50 @@ class Pipeline:
         
     def preprocess(self, df, ticker):
         try:
-            df = DataTransformation.preprocessing(df, ticker)
+            df = self.data_transformation.preprocessing(df, ticker)
             return df
         except Exception as e:
             raise e
         
     def feature_engineer(self, df):
         try: 
-            df = FeatureEngineering.feature_engineering(df)
+            df = self.feature_engineering.feature_engineering(df)
             return df
         except Exception as e:
             raise e
     
     def split_features_labels(self, df):
         try:
-            X, y = ModelBuilding.features_targets(self, df)
+            X, y = self.model_building.features_targets(self, df)
             return X,y
         except Exception as e:
             raise e
         
-    def make_prediction(X,y):
+    def make_prediction(self, X,y):
         try:
-            y_pred = ModelBuilding.model(X,y)
+            y_pred = self.model_building.model(X,y)
             return y_pred
         except Exception as e:
             raise e
         
     def calculate_technical_indicators(self, df):
         try:
-            df = Utils.technical_indicators(df)
+            df = self.utils.technical_indicators(df)
             return df
         except Exception as e:
             raise e
         
     def evaluate(self, y, y_pred):
         try:
-            acc = Utils.evaluate_model(y, y_pred)
+            acc = self.utils.evaluate_model(y, y_pred)
             return acc
         except Exception as e:
             raise e
+
+    def run(self, ticker, start, end, kind):
+        df = self.get_data(ticker, start, end, kind)
+        df = self.preprocess(df, ticker)
+        df = self.feature_engineer(df)
+        X, y = self.split_features_labels(df)
+        y_pred = self.make_prediction(X, y)
+        return y_pred
