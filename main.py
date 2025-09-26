@@ -6,6 +6,7 @@ from pipeline import Pipeline
 import plotly.express as px
 from fast import get_today_lists
 from yaml import safe_load
+from src.utils import Utils
 
 # Load configuration from config.yaml
 with open("config.yaml", "r") as file:
@@ -29,7 +30,7 @@ if st.button("Günlükleri Getir", type="primary"):
     st.dataframe(df_sell_today)
 
 # Determine the dates for data ingestion in 365 days range
-start, end = DataIngestion().get_dates()
+start, end = Utils().get_dates()
 
 ticker = st.selectbox(label="Hisse senedi seçin", options=stock_list)
 

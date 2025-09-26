@@ -24,7 +24,7 @@ class Utils:
             raise e
 
 
-    def technical_indicators(df:pd.DataFrame):
+    def technical_indicators(df:pd.DataFrame) -> pd.DataFrame:
         try:
             df["Buy"] = np.where((df["Prediction"]==1), 1, 0)
             df["Sell"] = np.where((df["Prediction"]==0), 1, 0)

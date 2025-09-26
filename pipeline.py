@@ -15,10 +15,10 @@ class Pipeline:
         self.utils = Utils()
 
 
-    def get_data(self, ticker, start, end):
+    def get_data(self, ticker, start, end, kind):
         """Veriyi DataIngestion sınıfı üzerinden çeker."""
         try:
-            df = self.data_ingestion.data_ingestion(ticker, start, end)
+            df = self.data_ingestion.data_ingestion(ticker, start, end, kind=kind)
             return df
         except Exception as e:
             raise RuntimeError(f"Pipeline failed while getting data for {ticker}: {e}") from e
@@ -65,5 +65,3 @@ class Pipeline:
             return acc
         except Exception as e:
             raise e
-    
-    

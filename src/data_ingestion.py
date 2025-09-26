@@ -3,21 +3,12 @@ import yfinance as yf
 from datetime import datetime
 
 class DataIngestion:
-    def get_dates(self) -> tuple[datetime, datetime]:
-        end = datetime.now()
-        end = datetime(end.year, end.month, end.day)
-        start_year = end.year - 1
-        start_month = end.month
-        start_day = end.day
-        start = datetime(start_year, start_month, start_day)
-        return start, end
-
-    def data_ingestion(ticker:str, start:datetime, end:datetime) -> pd.DataFrame:
+    def data_ingestion(ticker:str, start:datetime, end:datetime, kind="stock") -> pd.DataFrame:
         try:
             # Determine if the ticker is for crypto or stock based on its length
             ticker = ticker.upper()
             # Crypto ingestion
-            if len(ticker) < 4:
+            if kind == "crypto":
                 data = yf.download(
                     tickers=f"{ticker}-USD", 
                     start=start,
