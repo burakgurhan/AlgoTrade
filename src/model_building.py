@@ -5,7 +5,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.tree import DecisionTreeClassifier
 
 class ModelBuilding:
-    def features_targets(df):
+    def features_targets(df:pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
         try:
             feature_columns = ["Price_EMA7", "Price_EMA20", "Price_EMA50", "Price_EMA100", "EMA7_EMA20", "EMA7_EMA50", "EMA20_EMA100", "14_day_trend_direction", "30_day_trend_direction"]
             X = df[feature_columns]

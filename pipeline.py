@@ -71,4 +71,4 @@ class Pipeline:
         df = self.feature_engineer(df)
         X, y = self.split_features_labels(df)
         y_pred = self.make_prediction(X, y)
-        return y_pred
+        return df, y_pred

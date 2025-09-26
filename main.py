@@ -59,25 +59,23 @@ st.write("This is a data science project, and this is not built for financial ad
 
 if st.button("Tahminleri Getir", type="primary"):
     try:
-        data_ingest = Pipeline.get_data(ticker, start, end)
-        df_processed = Pipeline.preprocess(data_ingest)
-        df_engineered = Pipeline.feature_engineer(df_processed)
-        X, y = Pipeline.split_features_labels(df_engineered)
-        y_pred = Pipeline.make_prediction(X, y)
-        df_engineered["Prediction"] = y_pred
-        df_engineered = Pipeline.calculate_technical_indicators(df_engineered)
+        pipeline = Pipeline()
+        df, y_pred = pipeline.run(ticker, start, end, kind)
+        df["Prediction"] = y_pred
+        df = pipeline.calculate_technical_indicators(df)
 
-        if "Value_DT" in df_engineered.columns:
-            st.write(f"₺1000 yatırımın dönem sonundaki değeri: ₺{df_engineered['Value_DT'].tail(1).values.round(2)}")
 
-        fig = px.line(data_frame=df_engineered, x="Date", y="Close", title="Buy-Sell Signals")
-        if "Buy_DT_ind" in df_engineered.columns:
-            fig.add_scatter(x=df_engineered.loc[df_engineered["Buy_DT_ind"]==1, "Date"].values,
-                            y=df_engineered.loc[df_engineered["Buy_DT_ind"]==1, "Close"].values,
+        if "Value_DT" in df.columns:
+            st.write(f"₺1000 yatırımın dönem sonundaki değeri: ₺{df['Value_DT'].tail(1).values.round(2)}")
+
+        fig = px.line(data_frame=df, x="Date", y="Close", title="Buy-Sell Signals")
+        if "Buy_DT_ind" in df.columns:
+            fig.add_scatter(x=df.loc[df["Buy_DT_ind"]==1, "Date"].values,
+                            y=df.loc[df["Buy_DT_ind"]==1, "Close"].values,
                             mode='markers', name='Al', marker=dict(color='green', size=7))
-        if "Sell_DT_ind" in df_engineered.columns:
-            fig.add_scatter(x=df_engineered.loc[df_engineered["Sell_DT_ind"]==1, "Date"].values,
-                            y=df_engineered.loc[df_engineered["Sell_DT_ind"]==1, "Close"].values,
+        if "Sell_DT_ind" in df.columns:
+            fig.add_scatter(x=df.loc[df["Sell_DT_ind"]==1, "Date"].values,
+                            y=df.loc[df["Sell_DT_ind"]==1, "Close"].values,
                             mode='markers', name='Sat', marker=dict(color='red', size=7))
         fig.update_layout(xaxis_title="Tarih", yaxis_title="Kapanış Fiyatı")
         st.plotly_chart(fig)
