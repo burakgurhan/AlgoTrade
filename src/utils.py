@@ -10,7 +10,7 @@ class Utils:
         start_month = end.month
         start_day = end.day
         start = datetime(start_year, start_month, start_day)
-        return start, end
+        return start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d")   
 
     @staticmethod
     def evaluate_model(y_true, y_pred):

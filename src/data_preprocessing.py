@@ -8,7 +8,6 @@ class DataTransformation:
         
         try:
             df = df.dropna()
-            df = df["Close"].to_frame() # Remove other columns except 'Close'
 
             df["Return"] = df["Close"].diff()
             df["Return_pct"] = df["Close"].pct_change()
