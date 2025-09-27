@@ -1,0 +1,14 @@
+STOCK_LIST = [
+              'AGHOL', 'AKBNK', 'AKSA', 'AKSEN', 'ALARK', 'ARCLK', 'ASELS', 'BIMAS', 'BRSAN', 'BTCIM', 'CANTE', 'CCOLA',
+              'CIMSA', 'DOAS', 'DOHOL', 'DURDO', 'ECZYT', 'EGEEN', 'EGSER', 'EKGYO', 'ENJSA', 'ENKAI', 'EREGL', 'FONET',
+              'FROTO', 'GARAN', 'GUBRF', 'HALKB', 'ISDMR', 'ISGYO', 'ISMEN', 'KCHOL', 'KLGYO', 'KOZAA', 'KOZAL', 'LMKDC',
+              'MAVI', 'MGROS', 'MIATK', 'ODAS', 'OTKAR', 'PETKM', 'PGSUS', 'QUAGR', 'REEDR', 'SAHOL', 'SASA', 'SISE',
+              'SKBNK', 'SNICA', 'TABGD', 'TAVHL', 'TCELL', 'THYAO', 'TKFEN', 'TKNSA', 'TTKOM', 'TUKAS', 'TUPRS',
+              'ULKER', 'VAKBN', 'VESBE', 'VESTL', 'YATAS', 'YKBNK', 'YYLGD', 'ZOREN'
+            ]
+
+CRYPTO_LIST = [
+                "BTC", "XRP", "ETH", "SOL", "BNB", "DOGE", "AVAX", "SHIB", "LINK", "BCH", "USDT", 
+                "TRX", "ADA", "PYTH", "LTC","FTM", "XLM", "SAND", "PEPE", 
+                "MANA", "TROY", "TIA", "POL", "BCH"
+              ]

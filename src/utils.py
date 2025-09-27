@@ -3,9 +3,6 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 class Utils:
-    def __init__(self) -> None:
-        self.stock_list = ["AKSA", "ISMEN", "ISDMR", "FROTO", "TUPRS", "SAHOL", "EGEEN", "EGSER", "VESBE"]
-
     def get_dates(self) -> tuple[datetime, datetime]:
         end = datetime.now()
         end = datetime(end.year, end.month, end.day)
@@ -15,6 +12,7 @@ class Utils:
         start = datetime(start_year, start_month, start_day)
         return start, end
 
+    @staticmethod
     def evaluate_model(y_true, y_pred):
         try:
             accuracy = accuracy_score(y_true, y_pred)

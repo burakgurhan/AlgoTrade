@@ -85,4 +85,7 @@ class Pipeline:
         df = self.feature_engineer(df, ticker)
         X, y = self.split_features_labels(df, ticker)
         y_pred = self.make_prediction(X, y, ticker)
+        df["Prediction"] = y_pred
+        df = self.calculate_technical_indicators(df)
+        acc = self.evaluate(y, y_pred)
         return df, y_pred
