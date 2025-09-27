@@ -34,13 +34,8 @@ start, end = Utils().get_dates()
 
 ticker = st.selectbox(label="Hisse senedi seçin", options=stock_list)
 kind = "stock" if ticker in stock_list else "crypto"
-print(f"Selected ticker: {ticker}, kind: {kind}")
 # Use st.date_input for date selection
-col1, col2 = st.columns(2)
-with col1:
-    start = st.date_input("Başlangıç tarihi", value=date(2024, 1, 1), max_value=date.today())
-with col2:
-    end = st.date_input("Bitiş tarihi", value=date.today(), min_value=start, max_value=date.today())
+start, end = st.slider(min_value=start, max_value=end, label="Tarih aralığını seçin", value=(start, end), format="DD-MM-YYYY")
 
 st.subheader("Hissenin Son 5 günlük verileri")
 try:
