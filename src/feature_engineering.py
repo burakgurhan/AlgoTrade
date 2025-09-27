@@ -4,6 +4,7 @@ import ta as ta
 from sklearn.linear_model import LinearRegression
 
 class FeatureEngineering:
+    @staticmethod
     def feature_engineering(df:pd.DataFrame):
         def calculate_trend(data, window_size):
             trends = []

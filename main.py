@@ -34,7 +34,7 @@ start, end = Utils().get_dates()
 
 ticker = st.selectbox(label="Hisse senedi seçin", options=stock_list)
 kind = "stock" if ticker in stock_list else "crypto"
-
+print(f"Selected ticker: {ticker}, kind: {kind}")
 # Use st.date_input for date selection
 col1, col2 = st.columns(2)
 with col1:
@@ -47,9 +47,9 @@ try:
     df = DataIngestion.data_ingestion(ticker, start, end, kind=kind)
     if df is not None and not df.empty:
         df = df.reset_index()
-        st.dataframe(data=df.tail())
+        st.dataframe(data=df.tail(), hide_index=True, use_container_width=True)
         st.subheader(f"{ticker} Kapanış Fiyatları")
-        st.line_chart(data=df, x="Date", y="Close")
+        st.line_chart(data=df, x="Date", y="Close", x_label="Tarih", y_label="Kapanış Fiyatı")
     else:
         st.warning("Veri bulunamadı.")
 except Exception as e:

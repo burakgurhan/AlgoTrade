@@ -8,7 +8,7 @@ stock_list : [
             ]
 
 crypto_list : [
-                "BTC", "XRP", "ETH", "SOL", "BNB", "DOGE","AVAX", "SHIB", "LINK", "BCH", "USDT", 
-                "TRX", "ADA", "PYTH", "LTC", "NEAR", "MATIC", "DOT", "FTM", "XLM", "SAND", "PEPE", 
+                "BTC", "XRP", "ETH", "SOL", "BNB", "DOGE", "AVAX", "SHIB", "LINK", "BCH", "USDT", 
+                "TRX", "ADA", "PYTH", "LTC","FTM", "XLM", "SAND", "PEPE", 
                 "MANA", "TROY", "TIA", "POL", "BCH"
               ]

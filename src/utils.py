@@ -23,7 +23,7 @@ class Utils:
         except Exception as e:
             raise e
 
-
+    @staticmethod
     def technical_indicators(df:pd.DataFrame) -> pd.DataFrame:
         try:
             df["Buy"] = np.where((df["Prediction"]==1), 1, 0)

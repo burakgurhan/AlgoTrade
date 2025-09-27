@@ -99,5 +99,3 @@ def get_today_lists(stock_list):
             pass
 
     return buy_today, sell_today
-
-get_today_lists(stock_list)

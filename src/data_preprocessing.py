@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 class DataTransformation:
+    @staticmethod
     def preprocessing(df:pd.DataFrame, ticker:str) -> pd.DataFrame:    
         try:
             df = df.dropna()

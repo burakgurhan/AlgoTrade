@@ -17,7 +17,7 @@ class Pipeline:
 
     def get_data(self, ticker, start, end, kind):
         try:
-            df = self.data_ingestion.data_ingestion(ticker, start, end, kind=kind)
+            df = self.data_ingestion.data_ingestion(ticker, start, end, kind)
             return df
         except Exception as e:
             raise RuntimeError(f"Pipeline failed while getting data for {ticker}: {e}") from e
@@ -39,7 +39,7 @@ class Pipeline:
     
     def split_features_labels(self, df):
         try:
-            X, y = self.model_building.features_targets(self, df)
+            X, y = self.model_building.features_targets(df)
             return X,y
         except Exception as e:
             raise e

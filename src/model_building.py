@@ -5,9 +5,10 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.tree import DecisionTreeClassifier
 
 class ModelBuilding:
+    @staticmethod
     def features_targets(df:pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
         try:
-            feature_columns = ["Price_EMA7", "Price_EMA20", "Price_EMA50", "Price_EMA100", "EMA7_EMA20", "EMA7_EMA50", "EMA20_EMA100", "14_day_trend_direction", "30_day_trend_direction"]
+            feature_columns = ["Price_EMA10", "Price_EMA30", "Price_EMA60", "Price_EMA100", "EMA10_EMA30", "EMA10_EMA60", "EMA30_EMA100", "14_day_trend_direction", "30_day_trend_direction"]
             X = df[feature_columns]
             y = df["Target"]
             return X,y
@@ -33,6 +34,7 @@ class ModelBuilding:
         except Exception as e:
             raise e
         
+    @staticmethod
     def model(X,y):
         model = DecisionTreeClassifier(criterion="gini", max_depth=3, max_leaf_nodes=30, min_samples_split=5)
         try:
