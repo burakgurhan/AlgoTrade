@@ -22,7 +22,7 @@ class ModelBuilding:
         except Exception as e:
             raise e
         
-    def grid_seach(X, y, cv):
+    def grid_search(X, y, cv):
         param_grid = {
                         "max_depth":np.arange(3,10),
                         "criterion":["gini", "entropy"],
@@ -35,10 +35,16 @@ class ModelBuilding:
             raise e
         
     @staticmethod
-    def model(X,y):
-        model = DecisionTreeClassifier(criterion="gini", max_depth=3, max_leaf_nodes=30, min_samples_split=5)
+    def model(X, y):
+        model = DecisionTreeClassifier(
+            criterion="gini", 
+            max_depth=3, 
+            max_leaf_nodes=30, 
+            min_samples_split=5
+        )
+
         try:
-            model.fit(X,y)
+            model.fit(X, y)
             y_pred = model.predict(X)
             return y_pred
         except Exception as e:

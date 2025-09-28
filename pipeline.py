@@ -48,7 +48,7 @@ class Pipeline:
     def split_features_labels(self, df, ticker):
         try:
             X, y = self.model_building.features_targets(df)
-            return X,y
+            return X, y
         except Exception as e:
             raise RuntimeError(
                 f"[Step: Splitting Features & Labels] Failed while splitting features "
@@ -57,7 +57,7 @@ class Pipeline:
         
     def make_prediction(self, X, y, ticker):
         try:
-            y_pred = self.model_building.model(X,y)
+            y_pred = self.model_building.model(X, y)
             return y_pred
         except Exception as e:
             raise RuntimeError(
