@@ -50,12 +50,18 @@ class App:
                     end=self.end, 
                     kind="stock"
                     )
-                df_buy_today = pd.DataFrame(buy_today.items(), columns=["Ticker", "Fiyat"])
-                df_sell_today = pd.DataFrame(sell_today.items(), columns=["Ticker", "Fiyat"])
-                st.subheader("Bugün al")
-                st.dataframe(df_buy_today)
-                st.subheader("Bugün sat")
-                st.dataframe(df_sell_today)
+                st.session_state.df_buy_today = pd.DataFrame(buy_today.items(), columns=["Ticker", "Fiyat"])
+                st.session_state.df_sell_today = pd.DataFrame(sell_today.items(), columns=["Ticker", "Fiyat"])
+                
+
+                col1, col2 = st.columns(2, gap="small")
+                with col1:
+                    st.subheader("Bugün al")
+                    st.dataframe(st.session_state.df_buy_today)
+
+                with col2:
+                    st.subheader("Bugün sat")
+                    st.dataframe(st.session_state.df_sell_today)
 
             ticker_selection = st.selectbox(label="Hisse senedi seçin", options=self.stock_list)
             ticker = ticker_selection.upper()
@@ -114,12 +120,18 @@ class App:
                     end=self.end, 
                     kind="crypto"
                 )
-                df_buy_today = pd.DataFrame(buy_today.items(), columns=["Ticker", "Fiyat"])
-                df_sell_today = pd.DataFrame(sell_today.items(), columns=["Ticker", "Fiyat"])
-                st.subheader("Bugün al")
-                st.dataframe(df_buy_today)
-                st.subheader("Bugün sat")
-                st.dataframe(df_sell_today)
+                st.session_state.df_buy_today = pd.DataFrame(buy_today.items(), columns=["Ticker", "Fiyat"])
+                st.session_state.df_sell_today = pd.DataFrame(sell_today.items(), columns=["Ticker", "Fiyat"])
+                
+
+                col1, col2 = st.columns(2, gap="small")
+                with col1:
+                    st.subheader("Bugün al")
+                    st.dataframe(st.session_state.df_buy_today)
+
+                with col2:
+                    st.subheader("Bugün sat")
+                    st.dataframe(st.session_state.df_sell_today)
 
             ticker_selection = st.selectbox(label="Crypto seçin", options=self.crypto_list)
             ticker = ticker_selection.upper()
