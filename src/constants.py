@@ -9,5 +9,5 @@ STOCK_LIST = [
 
 CRYPTO_LIST = [
                 "BTC", "XRP", "ETH", "SOL", "BNB", "DOGE", "AVAX", "SHIB", "LINK", "BCH", "USDT", 
-                "TRX", "ADA", "PYTH", "LTC","FTM", "XLM", "SAND", "MANA", "TIA", "BCH"
+                "TRX", "ADA", "PYTH", "LTC", "XLM", "SAND", "MANA", "TIA", 
               ]
